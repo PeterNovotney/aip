@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US" class="glue-flexbox">
   <head>
-    <title>AIP-3001: Actions on Google AIP Process</title>
+    <title>AIP-4113: gcloud CLI Integration</title>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,maximum-scale=2">
@@ -21,9 +21,6 @@
     <script type="text/javascript" src="/assets/js/global.js?v=bd6b35c2"></script>
     
 <script type="text/javascript" src="/assets/js/proto-syntax.js"></script>
-<script type="text/javascript" src="/assets/js/graphviz/viz.js?v=bd6b35c2"></script>
-<script type="text/javascript" src="/assets/js/graphviz/lite.render.js?v=bd6b35c2"></script>
-<script type="text/javascript" src="/assets/js/aip/aip-graphviz.js?v=bd6b35c2"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140054909-1"></script>
     <script>
@@ -192,34 +189,22 @@
       <a href="/aog">Actions on Google</a>
     </li>
     <li class="nav-item nav-item-header">AIPs</li>
+    <li class="nav-item">
+      <a href="/4110">
+        <span class="aip-number">4110</span>
+        Application Default Credentials
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/4111">
+        <span class="aip-number">4111</span>
+        Self-signed JWT-based Access Token
+      </a>
+    </li>
     <li class="nav-item nav-item-active">
-      <a href="/3001">
-        <span class="aip-number">3001</span>
-        Actions on Google AIP Process
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/3010">
-        <span class="aip-number">3010</span>
-        Actions on Google Vertical Integration Webhook Format
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/3020">
-        <span class="aip-number">3020</span>
-        BII Schema Principles
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/3021">
-        <span class="aip-number">3021</span>
-        Type protos in Actions on Google APIs
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/3022">
-        <span class="aip-number">3022</span>
-        Built-in intent arguments and fulfillment APIs
+      <a href="/4113">
+        <span class="aip-number">4113</span>
+        gcloud CLI Integration
       </a>
     </li>
     </ul>
@@ -228,19 +213,20 @@
           
 <aside id="aip-sidebar" class="docs-component-sidebar">
   <table id="aip-summary">
-    <tr><th colspan="2">Actions on Google AIP Process</th></tr>
-    <tr><td>Number</td><td>3001</td></tr>
-    <tr><td>Permalink</td><td><a href="https://google.aip.dev/aog/3001">google.aip.dev/aog/3001</a></td></tr>
-    <tr><td>Scope</td><td>Actions on Google</td></tr>
-    <tr><td>State</td><td>Reviewing</td></tr>
-    <tr><td>Created</td><td>2019-10-03</td></tr>
-    <tr><td>Updated</td><td>2019-10-03</td></tr>
+    <tr><th colspan="2">gcloud CLI Integration</th></tr>
+    <tr><td>Number</td><td>4113</td></tr>
+    <tr><td>Permalink</td><td><a href="https://google.aip.dev/auth/4113">google.aip.dev/auth/4113</a></td></tr>
+    <tr><td>Scope</td><td>Auth</td></tr>
+    <tr><td>State</td><td>Approved</td></tr>
+    <tr><td>Created</td><td>2020-07-31</td></tr>
+    <tr><td>Updated</td><td>2020-07-31</td></tr>
   </table>
 
   <section id="aip-toc" class="docs-component-sidebar-toc">
     <div class="toc"><span class="toctitle">Contents</span><ul>
-<li><a href="#stakeholders">Stakeholders</a><ul>
-<li><a href="#actions-on-google-editors">Actions on Google Editors</a></li>
+<li><a href="#guidance">Guidance</a><ul>
+<li><a href="#credentials-generation">Credentials Generation</a></li>
+<li><a href="#expected-behaviors">Expected Behaviors</a></li>
 </ul>
 </li>
 </ul>
@@ -251,8 +237,8 @@
   <section class="docs-component-sidebar-actions">
     <ul>
       <li><a href="https://github.com/aip-dev/aip.dev/issues/">File Bug</a></li>
-      <li><a href="https://github.com/aip-dev/aip.dev/blob/master/aip/aog/3001.md">View source</a></li>
-      <li><a href="https://github.com/aip-dev/aip.dev/edit/master/aip/aog/3001.md">Edit this page</a></li>
+      <li><a href="https://github.com/aip-dev/aip.dev/blob/master/aip/auth/4113.md">View source</a></li>
+      <li><a href="https://github.com/aip-dev/aip.dev/edit/master/aip/auth/4113.md">Edit this page</a></li>
     </ul>
   </section>
 </aside>
@@ -270,68 +256,86 @@
       </li>
       
       <li class="glue-breadcrumbs__item" aria-level="2">
-        <a class="glue-breadcrumbs__link" href="/aog">
-          Actions on Google AIPs
+        <a class="glue-breadcrumbs__link" href="/auth">
+          Auth AIPs
         </a>
       </li>
       
       <li class="glue-breadcrumbs__item glue-breadcrumbs__item--active"
           aria-level="3">
-        Actions on Google AIP Process
+        gcloud CLI Integration
       </li>
     </ol>
   </nav>
 </section>
-  <p id="aip-state-banner" class="callout note">
-  This AIP is currently under review. This means that the editors have read it
-  and are in high-level concurrence, and while it is not yet fully approved, we
-  have a good faith expectation that the AIP will be approved in something
-  close to its current state.
-</p>
-  <h4 class="aip-number">AIP-3001</h4>
-  <h1>Actions on Google AIP Process</h1>
-<p>This AIP extends <a href="/1">AIP-1</a> with details specific to Actions on Google AIPs. Any
-details of <a href="/1">AIP-1</a> not modified or contradicted by this AIP also apply to
-Actions on Google AIPs.</p>
-<h2 id="stakeholders">Stakeholders</h2>
-<p>As with any process there are many different stakeholders when it comes to
-reviewing and working with AIPs. Below is a summary of the escalation path
-starting with the API producer.</p>
-<div class="highlight language-graphviz"><pre><span></span><code>digraph d_front_back {
-  rankdir=BT;
-  ranksep=0.3;
-  node [ style=&quot;filled,solid&quot; shape=box fontname=&quot;Roboto&quot; ];
-
-  producer [ label=&quot;API Producer&quot; ];
-  editors [ label=&quot;AIP Editors&quot; ];
-  aog_editors [ label=&quot;Actions on Google AIP Editors&quot; ];
-  tl_infra [ label=&quot;Infrastructure TL&quot; ];
-  tl_design [ label=&quot;Design TL&quot; ];
-  tl [ label=&quot;TL&quot; ];
-
-  producer -&gt; aog_editors;
-  aog_editors -&gt; editors;
-  editors -&gt; tl_infra -&gt; tl;
-  editors -&gt; tl_design -&gt; tl;
-}
+  
+  <h4 class="aip-number">AIP-4113</h4>
+  <h1>gcloud CLI Integration</h1>
+<p><a href="https://cloud.google.com/sdk/gcloud/reference">gcloud</a> is the CLI that manages authentication, local configuration, developer workflow, and interactions with the Google Cloud Platform (GCP) APIs. gcloud can generate default credentials by obtaining user access credentials via 3-legged OAuth (3LO) web flow and saving them to well-known locations in JSON format. These credentials are intended to be consumed by applications other than gcloud. <a href="https://google.aip.dev/auth/4110">Application Default Credentials (ADC) and Google Unified Auth Clients (GUAC)</a> <strong>must</strong> support the gcloud default credentials.</p>
+<p><strong>Note:</strong> Although the sample code is written in Python, this AIP describes guidance and requirements in a language-neutral way. It uses generic terminology which may be imprecise or
+inappropriate in certain languages or environments.</p>
+<h2 id="guidance">Guidance</h2>
+<p>This section describes the general guidance of supporting the gcloud default credentials.</p>
+<h3 id="credentials-generation">Credentials Generation</h3>
+<p>gcloud default credentials can be generated via command ‘<a href="https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login">gcloud auth application-default login</a>’. </p>
+<div class="highlight language-"><pre><span></span><code>$ gcloud auth application-default login
 </code></pre></div>
 
-<h3 id="actions-on-google-editors">Actions on Google Editors</h3>
-<p>The Actions on Google editors are the set of people who make decisions on
-Actions on Google AIPs before escalation to the general editors defined in
-<a href="/1">AIP-1</a>.</p>
-<p>The list of Actions on Google AIP editors is currently:</p>
+<p>The generated credentials are saved to well-known locations which vary as platforms:</p>
 <ul>
-<li>Ali Ibrahim (<a href="https://github.com/ahahibrahim">@ahahibrahim</a>)</li>
-<li>Richard Frankel (<a href="https://github.com/rofrankel">@rofrankel</a>)</li>
-<li>Shuyang Chen (<a href="https://github.com/Canain">@Canain</a>)</li>
+<li><strong>Linux, Mac</strong>: $HOME/.config/gcloud/application_default_credentials.json</li>
+<li><strong>Windows</strong>: %APPDATA%/gcloud/application_default_credentials.json</li>
 </ul>
-<p>The Actions on Google editors have the same responsibilities as the general
-editors. They also have the additional responsibility of establishing
-correctness of, and leadership support for, the contents of Actions on Google
-AIPs.</p>
-<p>Actions on Google AIP editorship is by invitation of the current Actions on
-Google editors.</p>
+<p>Below is an example of the gcloud default credentials,</p>
+<div class="highlight language-json"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_id.apps.googleusercontent.com&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_secret&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;quota_project_id&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_project&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_token&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;authorized_user&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>All the fields are populated by the login response from the Google authorization backend except for ‘quota_project_id’ which is retrieved from gcloud’s context. Additionally, the users can override ‘quota_project_id’ with the ‘--cleint-id-file’ flag,</p>
+<div class="highlight language-"><pre><span></span><code>$ gcloud auth application-default login --client-id-file=clientid.json
+</code></pre></div>
+
+<h3 id="expected-behaviors">Expected Behaviors</h3>
+<p>The auth libraries will use the information in the gcloud default credentials to exchange access tokens with Google authorization backend. The resulting access tokens will be further used by applications to call GCP APIs.</p>
+<p>The auth libraries and applications <strong>must</strong> follow the steps below:
+1.  The auth library loads the gcloud default credentials from the well-known location (see previous <a href="#credentials-generation">section</a>) of the platform on which it runs.</p>
+<ol>
+<li>
+<p>The auth library calls Google authorization backend with the refresh token, client ID and client secret in the gcloud default credentials and procures an access token. The URL for acquiring access tokens from Google authorization backend is https://oauth2.googleapis.com/token. Below is an example code with <a href="https://google-auth.readthedocs.io/en/latest/index.html">google-auth</a> as the auth library and <a href="https://urllib3.readthedocs.io/en/latest/">urllib3</a> as the http transport.</p>
+<div class="highlight language-python"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.oauth2</span> <span class="kn">import</span> <span class="n">_client</span> <span class="k">as</span> <span class="n">google_auth_client</span>
+<span class="kn">import</span> <span class="nn">google.auth.transport.urllib3</span> <span class="k">as</span> <span class="nn">google_auth_urllib3</span>
+<span class="kn">import</span> <span class="nn">urllib3</span>
+
+<span class="c1"># Create an http transport for communicating with Google authorization backend.</span>
+<span class="n">http</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">()</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">google_auth_urllib3</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">http</span><span class="p">)</span>
+
+<span class="c1"># Build parameters for the access token request. Assume the gcloud default credentials</span>
+<span class="c1"># are deserialized are into a dictionary ‘gcloud_default’ in the previous step.</span>
+<span class="n">token_uri</span> <span class="o">=</span> <span class="s1">&#39;https://oauth2.googleapis.com/token&#39;</span>
+<span class="n">refresh_token</span> <span class="o">=</span> <span class="n">gcloud_default</span><span class="p">[</span><span class="err">‘</span><span class="n">refresh_token</span><span class="err">’</span><span class="p">]</span>
+<span class="n">client_id</span> <span class="o">=</span> <span class="n">gcloud_default</span><span class="p">[</span><span class="err">‘</span><span class="n">client_id</span><span class="err">’</span><span class="p">]</span>
+<span class="n">client_secret</span> <span class="o">=</span> <span class="n">gcloud_default</span><span class="p">[</span><span class="err">‘</span><span class="n">client_secret</span><span class="err">’</span><span class="p">]</span>
+<span class="n">scopes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;https://www.googleapis.com/auth/cloud-platform&#39;</span><span class="p">]</span>
+
+<span class="c1"># Obtain an access token.</span>
+<span class="n">access_token</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">google_auth_client</span><span class="o">.</span><span class="n">refresh_grant</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">,</span> <span class="n">token_uri</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="n">scopes</span><span class="p">)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>The application calls GCP API with the access token obtained from the previous step. ‘project_project_id’ in the gcloud default credentials <strong>should</strong> be added to the ‘X-Goog-User-Project’ http header so that the associated account will be charged for billing and quota.</p>
+</li>
+</ol>
+<!-- prettier-ignore-start -->
+
+<!-- prettier-ignore-end -->
   <footer>
   Except as otherwise noted, the content of this page is licensed under the
   <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons
